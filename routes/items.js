@@ -36,7 +36,7 @@ router.patch('/:name', (req, res) => {
 
 router.delete('/:name', (req, res) => {
     const findItem = items.findIndex(item => item.name === req.params.name);
-    if(findItem === undefined){
+    if(findItem === -1){
         throw new HandleError('Item Not Found', 404);
     }
     items.splice(findItem, 1);
