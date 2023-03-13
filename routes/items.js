@@ -7,13 +7,18 @@ router.get('/', (req, res) => {
     res.json({items});
 })
 
-router.post('/', (req, res) => {
-    const newItem = {
-        name: req.body.name,
-        price: req.body.price
-    };
-    items.push(newItem);
-    res.status(201).json({item: newItem});
+router.post('/', (req, res, next) => {
+    try {
+        if(!req.body.name) throw new HandleError('Name is required', 404);
+        const newItem = {
+            name: req.body.name,
+            price: req.body.price
+        };
+        items.push(newItem);
+        res.status(201).json({item: newItem});
+    } catch(e){
+        next(e)
+    }
 })
 
 router.get('/:name', (req, res) => {

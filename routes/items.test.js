@@ -37,6 +37,10 @@ describe('POST /items', () => {
         expect(res.statusCode).toBe(201);
         expect(res.body).toEqual({item: {name: 'detergent', price: '14.99'}});
     });
+    test('404 Missing Name', async () => {
+        const res = await request(app).post('/items').send({});
+        expect(res.statusCode).toBe(404);
+    });
 });
 
 describe('PATCH /items/:name', () => {
