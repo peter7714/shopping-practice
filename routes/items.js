@@ -32,7 +32,7 @@ router.patch('/:name', (req, res) => {
     findItem.name = req.body.name;
     findItem.price = req.body.price;
     res.json({item: findItem});
-})
+});
 
 router.delete('/:name', (req, res) => {
     const findItem = items.findIndex(item => item.name === req.params.name);
@@ -40,7 +40,7 @@ router.delete('/:name', (req, res) => {
         throw new HandleError('Item Not Found', 404);
     }
     items.splice(findItem, 1);
-    res.json({message: 'Deleted'})
-})
+    res.json({message: 'Deleted'});
+});
 
 module.exports = router;

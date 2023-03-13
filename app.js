@@ -7,7 +7,6 @@ app.use(express.json());
 app.use('/items', itemRoutes);
 
 // Error handling //
-
 app.use((req, res, next) =>{
     const err = new HandleError('Not Found', 404);
     return next(err);
