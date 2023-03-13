@@ -3,7 +3,7 @@ const app = express();
 const HandleError = require('./handleError');
 const db = require('./fakeDb')
 
-
+app.use(express.json());
 
 
 
@@ -28,6 +28,4 @@ app.use((err, req, res, next) =>{
     });
 });
 
-app.listen(3000, () => {
-    console.log('App on port 3000');
-});
+module.exports = {app}
