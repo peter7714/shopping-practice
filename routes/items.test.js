@@ -19,5 +19,6 @@ describe('GET /items', () => {
     test('get all items',async function(){
         const res = await request(app).get('/items');
         expect(res.statusCode).toBe(200);
-    })
+        expect(res.body).toEqual({ items: [onion]});
+    });
 })
