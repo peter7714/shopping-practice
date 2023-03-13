@@ -3,11 +3,11 @@ const router = new express.Router();
 const HandleError = require('../handleError');
 const items = require('../fakeDb')
 
-router.get('/items', (req, res) => {
+router.get('/', (req, res) => {
     res.json({items});
 })
 
-router.post('/items', (req, res) => {
+router.post('/', (req, res) => {
     const newItem = {
         name: req.body.name,
         price: req.body.price
@@ -16,7 +16,7 @@ router.post('/items', (req, res) => {
     res.status(201).json({item: newItem});
 })
 
-router.get('/items/:name', (req, res) => {
+router.get('/:name', (req, res) => {
     const findItem = items.find(item => item.name === req.params.name);
     if(findItem === undefined){
         throw new HandleError('Item Not Found', 404);
@@ -24,7 +24,7 @@ router.get('/items/:name', (req, res) => {
     res.json({item: findItem})
 })
 
-router.patch('/items/:name', (req, res) => {
+router.patch('/:name', (req, res) => {
     const findItem = items.find(item => item.name === req.params.name);
     if(findItem === undefined){
         throw new HandleError('Item Not Found', 404);
@@ -34,7 +34,7 @@ router.patch('/items/:name', (req, res) => {
     res.json({item: findItem});
 })
 
-router.delete('/items/:name', (req, res) => {
+router.delete('/:name', (req, res) => {
     const findItem = items.findIndex(item => item.name === req.params.name);
     if(findItem === undefined){
         throw new HandleError('Item Not Found', 404);
@@ -42,3 +42,5 @@ router.delete('/items/:name', (req, res) => {
     items.splice(findItem, 1);
     res.json({message: 'Deleted'})
 })
+
+module.exports = router;
